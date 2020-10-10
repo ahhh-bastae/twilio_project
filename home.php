@@ -15,7 +15,7 @@ if(!isset($_SESSION['welcomeID'])){
 </head>
     <body>
         <a class="float-right logout" href="logout.php">LOGOUT </a>
-        <h1>Welcomeee ID Number: <?php echo $_SESSION['welcomeID']; ?>  </h1>
+        <h1>Welcome ID Number: <?php echo $_SESSION['welcomeID']; ?>  </h1>
 
             <div class="container" id="mainCont">
                 <div class="tableCont">
