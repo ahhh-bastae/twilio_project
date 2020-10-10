@@ -15,7 +15,7 @@ if(!isset($_SESSION['welcomeID'])){
 </head>
     <body>
         <a class="float-right logout" href="logout.php">LOGOUT </a>
-        <h1>Welcome ID Number: <?php echo $_SESSION['welcomeID']; ?>  </h1>
+        <h1>Welcomeee ID Number: <?php echo $_SESSION['welcomeID']; ?>  </h1>
 
             <div class="container" id="mainCont">
                 <div class="tableCont">
@@ -56,7 +56,7 @@ if(!isset($_SESSION['welcomeID'])){
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendToMany">Send Group</button>
                 </div>
             </div>   
-        
+                            
             <div class="modal fade" role="dialog" id="msgModal" tabindex="-1">
                 <div class="modal-dialog" id="modalSMS" role="document">
                     <div class="modal-content">
