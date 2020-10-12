@@ -69,11 +69,11 @@ if(!isset($_SESSION['welcomeID'])){
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="indivMsg">Phone Number</label>
-                                        <input type="text" name="indivMsg" class="form-control" required>
+                                        <input type="text" id="number" name="number" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="userSMS">Type your message here</label>
-                                        <textarea class="form-control" id="userSMS" rows="3" placeholder="type here"></textarea>
+                                        <textarea class="form-control" name="message" id="message" rows="3" placeholder="type here"></textarea>
                                 </div>
                                 </div>
 
