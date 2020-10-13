@@ -18,7 +18,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
     <div class="container" id="mainCont">
         <div class="tableCont">
             <h3>Contacts</h3>
-            <table>
+            <table id="table">
                 <tr>
                     <th>ID Number</th>
                     <th>First Name</th>
@@ -44,7 +44,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                     <td><?php echo $row["phone_number"]; ?></td>
                     <td><?php echo $row["program"]; ?></td>
                     <td>
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#msgModal">SMS</button>
+                        <button class="btn btn-secondary" id="smsbtn" data-toggle="modal" data-target="#msgModal">SMS</button>
                         <button class="btn btn-secondary" data-toggle="modal" data-target="">History</button>
                     </td>
                 </tr>
@@ -119,7 +119,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
-
+    <script src="js/tablejs.js"></script>
 </body>
 
 </html>

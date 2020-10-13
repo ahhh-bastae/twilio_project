@@ -20,7 +20,7 @@ if($num == 1){
     echo"ID Number is Already Taken";
 }
 else {
-    $sql ="INSERT INTO user VALUES ('$id','$firstname', '$lastname','$phone_number','$program','$password')";
+    $sql ="INSERT INTO user VALUES ('$id','$firstname', '$lastname','$phone_number','$program','$password',0)";
     mysqli_query($con,$sql);
     echo"Registration Successful";
 }
