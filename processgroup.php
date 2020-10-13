@@ -12,57 +12,44 @@
     // $token = 'your_twilio_token';
     // $twilio_number = 'your_twilio_number';
     $sid = 'ACd69baf0b3f84f3a2ad6914785a7e8188';
-    $token = '181b369f684483dab63b­f05bdc1f0872';
+    $token = '181b369f684483dab63bf05bdc1f0872';
     $twilio_number = '+16265328695';
     $client = new Client($sid, $token);
 
+
+    // Use the client to do fun stuff like send text messages!
+    $program = $_POST["program"];
+    $message = $_POST["message"];
+    $success = true;
+
     try {  
-        $success = true;
+        $con = mysqli_connect('localhost','root','');
+        mysqli_select_db($con, 'twilio_sms');    
 
-        if (isset($_POST['send_message'])){ 
-            $number = $_POST["number"];
-            $message = $_POST["message"];
-    
-            $client->messages->create(
-                // the number you'd like to send the message to
-                $number,
-                [
-                    // A free Twilio phone number
-                    'from' => $twilio_number,
-                    // the body of the text message you'd like to send
-                    'body' => $message
-                ]
-            );
+        $sql = "SELECT phone_number FROM user WHERE program = '".$program."' ";
+        $result = $con->query($sql);
+
+        if($result->num_rows > 0) {
+            $i = 0;
+            while($row = $result->fetch_assoc()) {
+                // $phone_number[$i] = $row['phone_number'];
+                $number = $row['phone_number'];
+                $client->messages->create(
+                    // the number you'd like to send the message to
+                    $number,
+                    [
+                        // A free Twilio phone number
+                        'from' => $twilio_number,
+                        // the body of the text message you'd like to send
+                        'body' => $message
+                    ]
+                );
+            }
+   
+            $number = '';
+            $message = '';
         }
     
-        if (isset($_POST['send_bulk_message'])){ 
-                $program = $_POST['program'];
-                $message = $_POST["message"];
-        
-                $con = mysqli_connect('localhost','root','');
-                mysqli_select_db($con, 'twilio_sms');    
-        
-                $sql = "SELECT phone_number FROM user WHERE program = '".$program."' ";
-                $result = $con->query($sql);
-        
-                if($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        $client->messages->create(
-                            // the number you'd like to send the message to
-                            $row['phone_number'],
-                            [
-                                // A free Twilio phone number
-                                'from' => $twilio_number,
-                                // the body of the text message you'd like to send
-                                'body' => $message
-                            ]
-                        );
-                    }
-                }
-        }
-
-        $number = '';
-        $message = '';
     } catch (Exception $e) {
         $success = false;
     }
