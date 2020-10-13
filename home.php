@@ -123,14 +123,15 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
             <div class="modal-content">
                 <form action="process.php" method="POST">
                     <div class="modal-header">
-                        <h3 class="modal-title">Send SMS</h3>
+                        <h3 class="modal-title">ID Number: <?php echo $_SESSION['user_id']; ?>'s Msg Logs</h3>
                         <button class="close" type="button" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="tableLogs">
-                                <h3>Message Logs</h3>
+                                <h3>Messages</h3>
                                 <table id="tableLogs">
                             <tr>
+                                <th>ID</th>
                                 <th>Message</th>
                                 <th>Date Time</th>
                                 
@@ -148,6 +149,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                             ?>
                                 <tr>
                                     <td><?php echo $row["id"]; ?></td>
+                                    <td><?php echo $row["lastname"]; ?></td>
                                     <td><?php echo $row["firstname"]; ?></td>
   
                                 </tr>
@@ -161,7 +163,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" name="close" class="btn btn-secondary">Close</button>
+                        <button type="button" name="close" data-dismiss="modal" class="btn btn-secondary">Close</button>
                     </div>
                 </form>
             </div>
