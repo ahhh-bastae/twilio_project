@@ -1,3 +1,4 @@
+
 <?php
     // Require the bundled autoload file - the path may need to change
     // based on where you downloaded and unzipped the SDK
@@ -11,26 +12,54 @@
     // $token = 'your_twilio_token';
     // $twilio_number = 'your_twilio_number';
     $sid = 'ACd69baf0b3f84f3a2ad6914785a7e8188';
-    $token = '181b369f684483dab63bf05bdc1f0872';
+    $token = '181b369f684483dab63b­f05bdc1f0872';
     $twilio_number = '+16265328695';
     $client = new Client($sid, $token);
 
-    // Use the client to do fun stuff like send text messages!
-    $number = $_POST["number"];
-    $message = $_POST["message"];
-    $success = true;
+    try {  
+        $success = true;
 
-    try {     
-        $client->messages->create(
-            // the number you'd like to send the message to
-            $number,
-            [
-                // A free Twilio phone number
-                'from' => $twilio_number,
-                // the body of the text message you'd like to send
-                'body' => $message
-            ]
-        );
+        if (isset($_POST['send_message'])){ 
+            $number = $_POST["number"];
+            $message = $_POST["message"];
+    
+            $client->messages->create(
+                // the number you'd like to send the message to
+                $number,
+                [
+                    // A free Twilio phone number
+                    'from' => $twilio_number,
+                    // the body of the text message you'd like to send
+                    'body' => $message
+                ]
+            );
+        }
+    
+        if (isset($_POST['send_bulk_message'])){ 
+                $program = $_POST['program'];
+                $message = $_POST["message"];
+        
+                $con = mysqli_connect('localhost','root','');
+                mysqli_select_db($con, 'twilio_sms');    
+        
+                $sql = "SELECT phone_number FROM user WHERE program = '".$program."' ";
+                $result = $con->query($sql);
+        
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $client->messages->create(
+                            // the number you'd like to send the message to
+                            $row['phone_number'],
+                            [
+                                // A free Twilio phone number
+                                'from' => $twilio_number,
+                                // the body of the text message you'd like to send
+                                'body' => $message
+                            ]
+                        );
+                    }
+                }
+        }
 
         $number = '';
         $message = '';
@@ -42,10 +71,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>SMS App With PHP and Twilio</title>
     <style>
         .jumbotron {

@@ -80,7 +80,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Send</button>
+                        <button type="submit" name="send_message" class="btn btn-success">Send</button>
                     </div>
                 </form>
             </div>
@@ -92,7 +92,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
     <div class="modal fade" role="dialog" id="sendToMany" tabindex="-1">
         <div class="modal-dialog" id="modalSMS" role="document">
             <div class="modal-content">
-                <form action="process.php" method="POST">
+                <form action="processgroup.php" method="POST">
                     <div class="modal-header">
                         <h3 class="modal-title">Send SMS</h3>
                         <button class="close" type="button" data-dismiss="modal">&times;</button>
@@ -100,16 +100,16 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="groupProg">Enter Program</label>
-                            <input type="text" name="groupProg" class="form-control" placeholder="Enter Course"
+                            <input type="text" id="program" name="program" class="form-control" placeholder="Enter Course"
                                 required>
                         </div>
                         <div class="form-group">
                             <label for="userSMS">Type your message here</label>
-                            <textarea class="form-control" id="userSMS" rows="3" placeholder="type here"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="3" placeholder="type here"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Send</button>
+                        <button type="submit" name="send_bulk_message" class="btn btn-success">Send</button>
                     </div>
                 </form>
             </div>
