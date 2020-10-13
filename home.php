@@ -45,7 +45,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                     <td><?php echo $row["program"]; ?></td>
                     <td>
                         <button class="btn btn-secondary" id="smsbtn" data-toggle="modal" data-target="#msgModal">SMS</button>
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="">History</button>
+                        <button class="btn btn-secondary" data-toggle="modal" data-target="#msgLog">Msg Logs</button>
                     </td>
                 </tr>
             <?php 
@@ -115,6 +115,58 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
             </div>
         </div>
     </div>
+
+
+    <!--Logs-->
+    <div class="modal fade" role="dialog" id="msgLog" tabindex="-1">
+        <div class="modal-dialog" id="modalSMS" role="document">
+            <div class="modal-content">
+                <form action="process.php" method="POST">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Send SMS</h3>
+                        <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tableLogs">
+                                <h3>Message Logs</h3>
+                                <table id="tableLogs">
+                            <tr>
+                                <th>Message</th>
+                                <th>Date Time</th>
+                                
+                            </tr>    
+
+                            <?php
+                                $con = mysqli_connect('localhost','root','');
+                                mysqli_select_db($con, 'twilio_sms');    
+
+                                $sql = "SELECT * FROM user";
+                                $result = $con->query($sql);
+
+                                if($result->num_rows > 0) {
+                                    while($row = $result-> fetch_assoc()) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $row["id"]; ?></td>
+                                    <td><?php echo $row["firstname"]; ?></td>
+  
+                                </tr>
+                            <?php 
+                                    } 
+                                } 
+                            ?>
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="close" class="btn btn-secondary">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>          
+
 
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
