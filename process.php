@@ -11,7 +11,7 @@
     // $token = 'your_twilio_token';
     // $twilio_number = 'your_twilio_number';
     $sid = 'ACd69baf0b3f84f3a2ad6914785a7e8188';
-    $token = '662511fa6454621040d2882be9a7b0c0';
+    $token = '62ebd3500b0ec6439791d218af6f34c7';
     $twilio_number = '+16265328695';
     $client = new Client($sid, $token);
 
