@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" name="phoneNum" class="form-control" placehodler="Type number preceded by +63" required>
+                        <input type="text" name="phoneNum" class="form-control" placeholder="Type number preceded by +63" required>
                     </div>
                     <div class="form-group">
                         <label>Program</label>
