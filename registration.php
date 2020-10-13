@@ -1,30 +1,27 @@
 <?php
-
 session_start();
-header('location:login.php');
+header('location:index.php');
 
 $con = mysqli_connect('localhost','root','');
-
 mysqli_select_db($con, 'twilio_sms');
 
-$id = $_POST['idNum'];
-$pass = $_POST['password'];
-$first = $_POST['firstName'];
-$last = $_POST['lastName'];
-$phone = $_POST['phoneNum'];
-$prog = $_POST['program'];
+$id = $_POST['id'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$phone_number = $_POST['phone_number'];
+$program = $_POST['program'];
+$password = $_POST['password'];
 
-$s = "select * from usertable where idNum = '$id'";
-$result = mysqli_query($con, $s);
+$sql = "SELECT * FROM user WHERE id = '$id'";
+$result = mysqli_query($con, $sql);
 $num = mysqli_num_rows($result);
 
 if($num == 1){
     echo"ID Number is Already Taken";
 }
 else {
-    $reg =" insert into usertable(idNum, firstName, lastName, phoneNum, program, password)
-    values ('$id','$first', '$last','$phone','$prog','$pass')";
-    mysqli_query($con,$reg);
+    $sql ="INSERT INTO user VALUES ('$id','$firstname', '$lastname','$phone_number','$program','$password')";
+    mysqli_query($con,$sql);
     echo"Registration Successful";
 }
 
