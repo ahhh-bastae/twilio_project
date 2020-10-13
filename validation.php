@@ -14,7 +14,7 @@ $last = $_POST['lastName'];
 $phone = $_POST['phoneNum'];
 $prog = $_POST['program'];
 
-$s = "select * from usertable where idNum = '$id' && password = '$pass'";
+$s = "select * from user where id = '$id' && password = '$pass'";
 $result = mysqli_query($con, $s);
 $num = mysqli_num_rows($result);
 
