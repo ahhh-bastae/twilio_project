@@ -7,19 +7,20 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
 <head>
     <title>Home Page</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/homestyle.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 
 <body>
-    <a class="float-right logout" href="logout.php">LOGOUT </a>
-    <h1 class="display-5" id="wc">Welcome Admin </h1>
+    <a class="float-right logout" href="logout.php">LOGOUT</a>
+    <h1 class="display-5" id="wc">Welcome Admin</h1>
 
     <div class="container" id="mainCont">
         <div class="tableCont">
             <h3>Contacts</h3>
             <table id="table">
-                <tr>
+                <tr class="text-center">
                     <th>ID Number</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -31,35 +32,38 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                 $con = mysqli_connect('localhost','root','');
                 mysqli_select_db($con, 'twilio_sms');    
 
-                $sql = "SELECT * FROM user";
+                $sql = "SELECT * FROM user WHERE type != 1";
                 $result = $con->query($sql);
 
                 if($result->num_rows > 0) {
-                    while($row = $result-> fetch_assoc()) {
-            ?>
+                    while($row = $result->fetch_assoc()) {
+                ?>
                 <tr>
                     <td><?php echo $row["id"]; ?></td>
                     <td><?php echo $row["firstname"]; ?></td>
                     <td><?php echo $row["lastname"]; ?></td>
-                    <td><?php echo $row["phone_number"]; ?></td>
+                    <td class="text-center"><?php echo $row["phone_number"]; ?></td>
                     <td><?php echo $row["program"]; ?></td>
-                    <td>
-                        <button class="btn btn-secondary" id="smsbtn" data-toggle="modal"
-                            data-target="#msgModal">SMS</button>
-                        <a href="messagelog.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">Logs</a>
+                    <td class="text-center">
+                        <a class="btn btn-warning" id="smsbtn" data-toggle="modal"
+                            data-target="#msgModal">
+                        <i class="fa fa-send"> SMS</i>
+                        </a>
+                        <a href="messagelog.php?id=<?php echo $row['id']; ?>" class="btn btn-info">
+                        <i class="fa fa-history"> Logs</i>
+                        </a>
                     </td>
                 </tr>
                 <?php 
                     } 
                 } 
-            ?>
+                ?>
 
-            </table>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendToMany">Send
+            </table><br>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendToMany"> Send
                 Group</button>
         </div>
     </div>
-
 
     <div class="modal fade" role="dialog" id="msgModal" tabindex="-1">
         <div class="modal-dialog" id="modalSMS" role="document">
@@ -91,7 +95,6 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
             </div>
         </div>
     </div>
-
 
     <!-- Group Message -->
     <div class="modal fade" role="dialog" id="sendToMany" tabindex="-1">

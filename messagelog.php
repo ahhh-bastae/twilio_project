@@ -19,7 +19,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
         <div class="tableCont">
             <h3>Logs</h3>
             <table id="table">
-                <tr>
+                <tr class="text-center">
                     <th>Message</th>
                     <th>Status</th>
                     <th>Date Sent</th>
@@ -35,9 +35,9 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
                 if($result->num_rows > 0) {
                     while($row = $result-> fetch_assoc()) {
             ?>
-                <tr>
-                    <td><?php echo $row["message"]; ?></td>
-                    <td><?php echo $row["status"]; ?></td>
+                <tr class="text-center">
+                    <td class="text-left"><?php echo $row["message"]; ?></td>
+                    <td><span class="badge badge-pill badge-success"><?php echo $row["status"]; ?></span></td>
                     <td><?php echo $row["date_sent"]; ?></td>
                
                 </tr>

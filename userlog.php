@@ -1,6 +1,14 @@
 <?php
 session_start();
 if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
+
+$con = mysqli_connect('localhost','root','');
+mysqli_select_db($con, 'twilio_sms');    
+
+$sql = "SELECT * FROM user WHERE id='".$_SESSION['user_id']."' ";
+$result = $con->query($sql);
+$user = $result->fetch_assoc();
+
 ?>
 <html>
 
@@ -12,41 +20,38 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
 </head>
 
 <body>
-    <h1 class="display-5">Welcome Student </h1>
+    <a class="float-right logout" href="logout.php">LOGOUT</a>
+    <h1 class="display-5">Welcome Student</h1>
 
     <div class="container" id="mainCont">
         <div class="tableCont">
-            <h3>Logs</h3>
+            <h3>Inbox</h3>
+            <h5><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></h5>
             <table id="table">
-                <tr>
+                <tr class="text-center">
                     <th>Message</th>
                     <th>Status</th>
                     <th>Date Sent</th>
-
                 </tr>
                 <?php
-                $con = mysqli_connect('localhost','root','');
-                mysqli_select_db($con, 'twilio_sms');    
 
-                $sql = "SELECT * FROM message_log WHERE user_id='".$_GET['id']."' ";
+                $sql = "SELECT * FROM message_log WHERE user_id='".$_SESSION['user_id']."' ";
                 $result = $con->query($sql);
 
                 if($result->num_rows > 0) {
-                    while($row = $result-> fetch_assoc()) {
-            ?>
-                <tr>
-                    <td><?php echo $row["message"]; ?></td>
-                    <td><?php echo $row["status"]; ?></td>
+                    while($row = $result->fetch_assoc()) {
+                ?>
+                <tr class="text-center">
+                    <td class="text-left"><?php echo $row["message"]; ?></td>
+                    <td><span class="badge badge-pill badge-success"><?php echo $row["status"]; ?></span></td>
                     <td><?php echo $row["date_sent"]; ?></td>
-               
                 </tr>
                 <?php 
                     } 
                 } 
-            ?>
+                ?>
 
             </table><br>
-            <a href="logout.php" class="btn btn-secondary">Logout</a>
         </div>
     </div>
 

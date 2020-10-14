@@ -62,6 +62,14 @@
             $number = '';
             $message = '';
         }
+
+        $sql = "SELECT program FROM user WHERE program = '".$program."' ";
+        $result = mysqli_query($con, $sql);
+        $num = mysqli_num_rows($result);
+
+        if($num < 1){
+            $success = false;
+        }
     
     } catch (Exception $e) {
         $success = false;
