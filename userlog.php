@@ -12,8 +12,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
 </head>
 
 <body>
-    <a class="float-right logout" href="logout.php">LOGOUT </a>
-    <h1 class="display-5">Welcome Admin</h1>
+    <h1 class="display-5">Welcome Student </h1>
 
     <div class="container" id="mainCont">
         <div class="tableCont">
@@ -47,7 +46,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
             ?>
 
             </table><br>
-            <a href="home.php" class="btn btn-primary">Back</a>
+            <a href="logout.php" class="btn btn-secondary">Logout</a>
         </div>
     </div>
 

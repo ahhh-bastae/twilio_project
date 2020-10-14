@@ -13,7 +13,7 @@ if(!isset($_SESSION['is_logged_in'])){ header('location:index.php'); }
 
 <body>
     <a class="float-right logout" href="logout.php">LOGOUT </a>
-    <h1 class="display-5">Welcome ID Number: <?php echo $_SESSION['user_id']; ?> </h1>
+    <h1 class="display-5" id="wc">Welcome Admin </h1>
 
     <div class="container" id="mainCont">
         <div class="tableCont">
